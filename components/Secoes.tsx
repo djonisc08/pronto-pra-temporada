@@ -116,27 +116,33 @@ export function Prova() {
         <div className="flex flex-col gap-6">
           <h2 className="flex flex-col gap-3">
             <span className={lead}>perguntei pra IA do Google:</span>
-            <span className="display text-[clamp(2rem,4.2vw,3.1rem)] text-areia-100">“Qual o melhor restaurante nos Ingleses?”</span>
+            <span className="display text-[clamp(2.2rem,5vw,4rem)] text-areia-100">“Padaria perto de mim.”</span>
           </h2>
-          <p className="max-w-[40ch] text-[19px] leading-[1.55] text-nevoa">
-            Cinco estabelecimentos apareceram. Se o teu não tá na lista, o turista nem sabe que tu existe.
+          <p className="max-w-[40ch] text-[19px] leading-[1.55] text-areia-100">
+            Ela respondeu com mapa, foto, nota, horário e o botão de rota até a porta. Quem não aparece ali não existe pra esse cliente.
+          </p>
+          <p className="max-w-[40ch] text-[17px] leading-[1.55] text-nevoa">
+            É assim pra restaurante, bar, açaí, pousada: o turista pergunta e a IA escolhe por ele.
           </p>
         </div>
 
-        <figure className="w-full max-w-[480px] lg:justify-self-end">
-          <ol className="flex flex-col gap-2" aria-label="Cinco estabelecimentos na resposta da IA, nomes ocultos">
-            {[58, 44, 66, 38, 52].map((w, i) => (
-              <li key={i} className="flex items-center gap-4 rounded-lg bg-mata-800 px-4 py-3.5">
-                <span className="w-4 text-[17px] font-black text-ambar">{i + 1}</span>
-                <span className="h-3 rounded-full bg-nevoa/40 blur-[3px]" style={{ width: `${w}%` }} aria-hidden="true" />
-                <span className="sr-only">nome oculto</span>
-              </li>
-            ))}
-          </ol>
-          <figcaption className="mt-3 text-[14px] font-semibold text-nevoa">Resposta real da IA do Google em 03/11, nomes ocultos.</figcaption>
-          <p className="mt-4 rounded-[var(--radius-stamp)] border-2 border-dashed border-brasa-clara px-4 py-3 text-[19px] font-extrabold uppercase text-brasa-clara">
+        <figure className="relative mx-auto w-full max-w-[380px] lg:mx-0 lg:justify-self-end">
+          <div className="overflow-hidden rounded-[30px] border-[6px] border-tinta bg-tinta shadow-[0_30px_80px_rgba(0,0,0,.55)] ring-1 ring-mata-700">
+            <Image
+              src="/prova-ia-google.jpg"
+              alt="Resposta real da IA do Google para “padaria perto de mim” em Florianópolis, com mapa e lista de padarias; nomes, fotos e endereços borrados."
+              width={738}
+              height={1352}
+              sizes="380px"
+              className="block h-auto w-full"
+            />
+          </div>
+          <span aria-hidden="true" className="stamp absolute bottom-16 -left-3 -rotate-[7deg] bg-mata-950 text-[26px] leading-[32px] shadow-[0_10px_30px_rgba(0,0,0,.5)] sm:-left-10">
             E tu?
-          </p>
+          </span>
+          <figcaption className="mt-5 text-[14px] font-semibold leading-snug text-nevoa">
+            Resposta real da IA do Google em Florianópolis, 03/11. Nomes, fotos e endereços borrados.
+          </figcaption>
         </figure>
 
         {CASO_REAL && (
