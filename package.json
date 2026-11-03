@@ -1,0 +1,30 @@
+{
+  "name": "pronto-pra-temporada",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "5.2.6",
+    "motion": "12.23.12",
+    "next": "15.5.28",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.1.12",
+    "@types/node": "22.18.0",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "tailwindcss": "4.1.12",
+    "typescript": "5.9.2"
+  },
+  "overrides": {
+    "postcss": "8.5.30",
+    "sharp": "0.35.5"
+  }
+}
