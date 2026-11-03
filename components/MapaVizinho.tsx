@@ -14,11 +14,10 @@ const VIZINHOS = [
   { x: 432, y: 556 },
 ];
 const TUA_CASA = { x: 318, y: 388 };
-const BUSCA = "restaurante perto de mim";
 const PIN = "M0 0 C -9 -13 -16 -21 -16 -31 A 16 16 0 1 1 16 -31 C 16 -21 9 -13 0 0 Z";
 const pct = (v: number, total: number) => `${(v / total) * 100}%`;
 
-export function MapaVizinho({ className = "" }: { className?: string }) {
+export function MapaVizinho({ className = "", busca = "restaurante perto de mim" }: { className?: string; busca?: string }) {
   const reduce = useReducedMotion();
   const box = useRef<HTMLDivElement>(null);
   const luz = useRef<SVGRadialGradientElement>(null);
@@ -29,19 +28,19 @@ export function MapaVizinho({ className = "" }: { className?: string }) {
   // Digitação da busca
   useEffect(() => {
     if (reduce) {
-      setTyped(BUSCA);
+      setTyped(busca);
       return;
     }
     let i = 0;
     let timer: ReturnType<typeof setTimeout>;
     const tick = () => {
       i += 1;
-      setTyped(BUSCA.slice(0, i));
-      if (i < BUSCA.length) timer = setTimeout(tick, 38);
+      setTyped(busca.slice(0, i));
+      if (i < busca.length) timer = setTimeout(tick, 38);
     };
     timer = setTimeout(tick, 350);
     return () => clearTimeout(timer);
-  }, [reduce]);
+  }, [reduce, busca]);
 
   // Lanterna: só com mouse de verdade e sem redução de movimento
   useEffect(() => {
@@ -88,7 +87,7 @@ export function MapaVizinho({ className = "" }: { className?: string }) {
       className={`relative select-none overflow-hidden ${className}`}
       style={{ containerType: "size" }}
       role="img"
-      aria-label="Mapa de uma busca por restaurante perto de mim: os pins dos vizinhos acendem e o do teu negócio fica apagado."
+      aria-label={`Mapa de uma busca por ${busca}: os pins dos vizinhos acendem e o do teu negócio fica apagado.`}
     >
       {/* caixa na proporção do desenho, cobrindo a área (como object-fit: cover) */}
       <div

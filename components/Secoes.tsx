@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CASO_REAL, WHATS_DIRETO, WHATS_DISPLAY } from "@/lib/config";
 import { Carimbo } from "./Carimbo";
+import { Magnetic } from "./Magnetic";
 import { ChatIcon } from "./icons";
 
 const wrap = "mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12";
@@ -178,7 +179,7 @@ export function QuemFaz() {
             <p>Sou daqui e atendo pessoalmente, de porta em porta.</p>
             <p>Falo a língua do comércio: sem jargão, sem contrato de agência.</p>
           </div>
-          <a href={WHATS_DIRETO} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center gap-2 self-start text-[17px] font-bold text-ambar underline-offset-4 hover:underline">
+          <a href={WHATS_DIRETO} target="_blank" rel="noopener" data-origem="quem-faz" className="inline-flex min-h-11 items-center gap-2 self-start text-[17px] font-bold text-ambar underline-offset-4 hover:underline">
             <ChatIcon size={20} /> {WHATS_DISPLAY}
           </a>
         </div>
@@ -231,15 +232,18 @@ export function CtaFinal() {
           <span className="display text-[clamp(3.2rem,10vw,8.5rem)] text-ambar">no Whats.</span>
           <span className="mt-3 text-[22px] font-bold text-areia-100 sm:text-[28px]">e manda: RAIO X, antes da temporada.</span>
         </h2>
+        <Magnetic>
         <a
           href={WHATS_DIRETO}
           target="_blank"
           rel="noopener"
+          data-origem="cta-final"
           className="inline-flex min-h-[64px] items-center gap-3 rounded-full bg-brasa px-9 text-[20px] font-extrabold text-creme shadow-[0_12px_32px_rgba(220,76,43,.35)] transition-transform duration-200 hover:-translate-y-0.5"
         >
           <ChatIcon />
           Mandar “RAIO X”
         </a>
+        </Magnetic>
         <p className="text-[15px] font-semibold text-nevoa">Grátis, sem compromisso, direto comigo.</p>
       </div>
     </section>

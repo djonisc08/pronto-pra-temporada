@@ -39,6 +39,7 @@ export function WhatsFloat() {
       href={WHATS_DIRETO}
       target="_blank"
       rel="noopener"
+      data-origem="flutuante"
       aria-hidden={!visivel}
       tabIndex={visivel ? 0 : -1}
       className={`fixed inset-x-4 bottom-[calc(16px+env(safe-area-inset-bottom))] z-50 flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-brasa text-[19px] font-extrabold text-creme shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none lg:hidden ${

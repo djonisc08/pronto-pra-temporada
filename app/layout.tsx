@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/archivo/wdth.css";
 import "./globals.css";
+import { Medicao } from "@/components/Medicao";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pronto-pra-temporada.vercel.app"),
@@ -25,7 +26,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body className="grain">{children}</body>
+      <body className="grain">
+        {children}
+        <Medicao />
+      </body>
     </html>
   );
 }

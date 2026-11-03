@@ -98,3 +98,23 @@
     white-space: nowrap;
   }
 }
+
+/* Faixa de buscas em movimento */
+@layer components {
+  .pt-marquee {
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+  .pt-marquee-trilha { animation: pt-marquee 48s linear infinite; }
+  .pt-marquee-reverso { animation-direction: reverse; animation-duration: 56s; }
+  .pt-marquee:hover .pt-marquee-trilha { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) {
+    .pt-marquee-trilha { animation: none; flex-wrap: wrap; width: auto; padding: 0 20px; }
+    .pt-marquee-trilha > li:nth-child(n + 8) { display: none; }
+    .pt-marquee { mask-image: none; -webkit-mask-image: none; }
+  }
+}
+@keyframes pt-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 6px)); }
+}

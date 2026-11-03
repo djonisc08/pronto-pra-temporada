@@ -1,6 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
+import { lerParametros } from "@/lib/params";
+import { buscaDe } from "@/lib/quiz";
+import { Magnetic } from "./Magnetic";
 import { WHATS_DIRETO } from "@/lib/config";
 import { MapaVizinho } from "./MapaVizinho";
 
@@ -9,6 +13,13 @@ const LINHA_1 = "Teu cliente te procurou hoje…".split(" ");
 export function Hero() {
   const reduce = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
+  const [busca, setBusca] = useState(buscaDe(null));
+
+  // anúncio com ?tipo=acai mostra "açaí perto de mim" no mapa
+  useEffect(() => {
+    const { tipo } = lerParametros(window.location.search);
+    if (tipo) setBusca(buscaDe(tipo));
+  }, []);
 
   return (
     <section id="hero" className="vinheta relative overflow-hidden">
@@ -21,6 +32,7 @@ export function Hero() {
             href={WHATS_DIRETO}
             target="_blank"
             rel="noopener"
+            data-origem="topo"
             className="inline-flex min-h-11 items-center text-[15px] font-bold text-ambar underline-offset-4 hover:underline"
           >
             <span className="hidden sm:inline">Falar no&nbsp;</span>WhatsApp
@@ -65,6 +77,7 @@ export function Hero() {
                 Faz o teste de 10 segundos e descobre onde o teu negócio tá vazando cliente antes da temporada.
               </p>
               <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+                <Magnetic>
                 <a
                   href="#teste"
                   className="group inline-flex min-h-[60px] items-center gap-3 rounded-full bg-brasa px-8 text-[19px] font-extrabold text-creme shadow-[0_12px_32px_rgba(220,76,43,.35)] transition-transform duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0"
@@ -74,7 +87,8 @@ export function Hero() {
                     <path d="M12 5v14M5 12l7 7 7-7" />
                   </svg>
                 </a>
-                <a href={WHATS_DIRETO} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center text-[17px] font-bold text-areia-100 underline decoration-mata-700 decoration-2 underline-offset-[6px] hover:decoration-ambar">
+                </Magnetic>
+                <a href={WHATS_DIRETO} target="_blank" rel="noopener" data-origem="hero" className="inline-flex min-h-11 items-center text-[17px] font-bold text-areia-100 underline decoration-mata-700 decoration-2 underline-offset-[6px] hover:decoration-ambar">
                   Prefiro falar no WhatsApp
                 </a>
               </div>
@@ -83,7 +97,7 @@ export function Hero() {
           </div>
 
           {/* mobile: o mapa vem logo abaixo, sangrando nas bordas */}
-          <MapaVizinho className="-mx-5 aspect-[4/5] sm:-mx-8 sm:aspect-[5/4] lg:hidden" />
+          <MapaVizinho busca={busca} className="-mx-5 aspect-[4/5] sm:-mx-8 sm:aspect-[5/4] lg:hidden" />
         </div>
       </div>
 
@@ -92,7 +106,7 @@ export function Hero() {
         className="absolute inset-y-0 right-0 hidden w-[50%] lg:block"
         style={{ maskImage: "linear-gradient(to right, transparent 0%, #000 22%)", WebkitMaskImage: "linear-gradient(to right, transparent 0%, #000 22%)" }}
       >
-        <MapaVizinho className="h-full w-full" />
+        <MapaVizinho busca={busca} className="h-full w-full" />
       </div>
     </section>
   );

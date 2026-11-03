@@ -1,3 +1,4 @@
+import { BuscasTuristas } from "@/components/BuscasTuristas";
 import { Hero } from "@/components/Hero";
 import { Quiz } from "@/components/Quiz";
 import { CtaFinal, Perguntas, Portas, Prova, QuemFaz, RaioX, Rodape } from "@/components/Secoes";
@@ -17,6 +18,7 @@ export default function Page() {
   return (
     <main>
       <Hero />
+      <BuscasTuristas />
 
       <section id="teste" className="scroll-mt-4 bg-mata-950 py-20 lg:py-32">
         <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">

@@ -24,6 +24,27 @@ npm run build && npm start
 
 O bloco "Caso real" só aparece quando `CASO_REAL` em `lib/config.ts` for preenchido, e só deve ser preenchido com resultado medido e autorização do dono.
 
+## Links para anúncios
+
+A página se adapta ao anúncio pelos parâmetros `tipo` e `bairro` (sem acento, com hífen):
+
+```
+https://pronto-pra-temporada.vercel.app/?tipo=acai
+https://pronto-pra-temporada.vercel.app/?tipo=restaurante&bairro=ingleses
+https://pronto-pra-temporada.vercel.app/?tipo=loja-de-bebidas&bairro=canasvieiras
+```
+
+Tipos: `restaurante`, `bar`, `loja-de-bebidas`, `casa-de-carne`, `acai`, `sorveteria`, `pousada`, `outro`.
+Bairros: `ingleses`, `canasvieiras`, `jurere`, `lagoa`, `campeche`, `centro`, `outro`.
+
+Com `tipo`, o mapa do topo mostra a busca daquele negócio e o teste já começa no bairro; com `tipo` e `bairro`, começa direto nas perguntas.
+
+## Medição
+
+- **Vercel Analytics:** ative em Project → Analytics na Vercel. Mostra visitas, origem e dispositivo, sem cookies.
+- **Eventos:** `teste_iniciado`, `teste_concluido` (com nº de vazamentos, tipo e bairro), `resultado_salvo` e `whats_click` (com a origem do botão: `topo`, `hero`, `resultado`, `quem-faz`, `cta-final`, `flutuante`). Eventos personalizados na Vercel exigem o plano Pro; no plano grátis aparecem só as visitas.
+- **Pixel da Meta (opcional):** crie a variável `NEXT_PUBLIC_META_PIXEL_ID` na Vercel (Settings → Environment Variables) com o ID do Pixel e faça um novo deploy. O clique no WhatsApp vira o evento `Contact`. Antes de ligar o Pixel, publique um aviso de privacidade/cookies (LGPD).
+
 ## Publicar
 
 Importe o repositório na Vercel (plano gratuito). Não precisa de variáveis de ambiente.

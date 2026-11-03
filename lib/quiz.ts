@@ -27,6 +27,8 @@ export interface Pergunta {
   vazando: string;
   ok: string;
   curto: string;
+  /** Texto curto do carimbo no resultado. */
+  carimbo: string;
   busca?: string;
 }
 
@@ -71,6 +73,7 @@ export function perguntas(tipo: Tipo | null): Pergunta[] {
       vazando: "Não aparece nos 3 primeiros do mapa",
       ok: "Aparece nos 3 primeiros",
       curto: "mapa",
+      carimbo: "Fora do mapa",
       busca,
     },
     {
@@ -80,6 +83,7 @@ export function perguntas(tipo: Tipo | null): Pergunta[] {
       vazando: `Sem foto boa dos ${coisa}`,
       ok: `Foto boa dos ${coisa}`,
       curto: "foto",
+      carimbo: "Sem foto boa",
     },
     {
       kind: "hours",
@@ -88,6 +92,7 @@ export function perguntas(tipo: Tipo | null): Pergunta[] {
       vazando: "Horário desatualizado",
       ok: "Horário certo",
       curto: "horário",
+      carimbo: "Horário errado",
     },
     {
       kind: "reviews",
@@ -96,6 +101,7 @@ export function perguntas(tipo: Tipo | null): Pergunta[] {
       vazando: "Avaliações sem resposta",
       ok: "Avaliações respondidas",
       curto: "avaliação",
+      carimbo: "Sem resposta",
     },
     {
       kind: "menu",
@@ -104,12 +110,14 @@ export function perguntas(tipo: Tipo | null): Pergunta[] {
       vazando: `${cat} fora do perfil`,
       ok: `${cat} no perfil`,
       curto: cat.toLowerCase(),
+      carimbo: t === "Pousada" ? "Sem preços" : `Sem ${cat.toLowerCase()}`,
     },
   ];
 }
 
 export interface Resultado {
   vazando: string[];
+  carimbos: string[];
   ok: string[];
   mensagem: string;
   link: string;
@@ -121,22 +129,29 @@ export function resultado(tipo: Tipo | null, bairro: Bairro | null, respostas: (
   const vazando: string[] = [];
   const ok: string[] = [];
   const curtos: string[] = [];
+  const carimbos: string[] = [];
   qs.forEach((q, i) => {
     if (respostas[i] === "Sim") ok.push(q.ok);
     else {
       vazando.push(q.vazando);
       curtos.push(q.curto);
+      carimbos.push(q.carimbo);
     }
   });
   const quem = `Sou ${NA_MENSAGEM[tipo ?? "Outro"]} ${PREP[bairro ?? "Outro"]}.`;
   const mensagem = vazando.length
     ? `Oi Djonata! Fiz o teste. ${quem} Errei: ${curtos.join(", ")}. Quero o RAIO X.`
     : `Oi Djonata! Fiz o teste. ${quem} Acertei tudo. Quero o RAIO X completo.`;
-  return { vazando, ok, mensagem, link: waLink(mensagem) };
+  return { vazando, carimbos, ok, mensagem, link: waLink(mensagem) };
 }
 
 /** "Restaurante nos Ingleses" — usado no cartão do Raio-X. */
 export function quemTexto(tipo: Tipo | null, bairro: Bairro | null): string {
   const t = tipo && tipo !== "Outro" ? tipo : "Comércio";
   return `${t} ${PREP[bairro ?? "Outro"]}`;
+}
+
+/** Busca que o turista digita para esse tipo de negócio: "açaí perto de mim". */
+export function buscaDe(tipo: Tipo | null): string {
+  return `${BUSCA[tipo ?? "Restaurante"]} perto de mim`;
 }
