@@ -108,11 +108,21 @@
   .pt-marquee-trilha { animation: pt-marquee 48s linear infinite; }
   .pt-marquee-reverso { animation-direction: reverse; animation-duration: 56s; }
   .pt-marquee:hover .pt-marquee-trilha { animation-play-state: paused; }
+  /* entrada do hero em CSS puro: aparece assim que a página pinta, sem esperar o JavaScript */
+  .pt-entra { animation: pt-entra 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+  .pt-bate { animation: pt-bate 0.42s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; transform-origin: left center; }
   @media (prefers-reduced-motion: reduce) {
+    .pt-entra, .pt-bate { animation: none; }
     .pt-marquee-trilha { animation: none; flex-wrap: wrap; width: auto; padding: 0 20px; }
     .pt-marquee-trilha > li:nth-child(n + 8) { display: none; }
     .pt-marquee { mask-image: none; -webkit-mask-image: none; }
   }
+}
+@keyframes pt-entra {
+  from { opacity: 0; transform: translateY(0.35em); }
+}
+@keyframes pt-bate {
+  from { opacity: 0; transform: scale(1.08); filter: blur(6px); }
 }
 @keyframes pt-marquee {
   from { transform: translateX(0); }

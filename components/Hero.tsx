@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { lerParametros } from "@/lib/params";
 import { buscaDe } from "@/lib/quiz";
@@ -11,8 +10,6 @@ import { MapaVizinho } from "./MapaVizinho";
 const LINHA_1 = "Teu cliente te procurou hoje…".split(" ");
 
 export function Hero() {
-  const reduce = useReducedMotion();
-  const ease = [0.22, 1, 0.36, 1] as const;
   const [busca, setBusca] = useState(buscaDe(null));
 
   // anúncio com ?tipo=acai mostra "açaí perto de mim" no mapa
@@ -44,35 +41,21 @@ export function Hero() {
             <h1 className="display flex flex-col gap-2">
               <span className="text-[clamp(2.1rem,5.6vw,4.4rem)] text-areia-100 lg:text-[clamp(2.4rem,3.5vw,3.5rem)]">
                 {LINHA_1.map((w, i) => (
-                  <motion.span
-                    key={i}
-                    className="inline-block"
-                    initial={reduce ? false : { opacity: 0, y: "0.35em" }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.08 + i * 0.07, duration: 0.5, ease }}
-                  >
+                  <span key={i} className="pt-entra inline-block" style={{ "--d": `${0.04 + i * 0.05}s` } as React.CSSProperties}>
                     {w}
-                    {i < LINHA_1.length - 1 ? " " : ""}
-                  </motion.span>
+                    {i < LINHA_1.length - 1 ? " " : ""}
+                  </span>
                 ))}
               </span>
-              <motion.span
-                className="block text-[clamp(3rem,8.4vw,6.9rem)] text-brasa lg:text-[clamp(3.4rem,5.5vw,5.5rem)]"
-                initial={reduce ? false : { opacity: 0, scale: 1.08, filter: "blur(6px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                transition={{ delay: 0.62, duration: 0.42, ease }}
-                style={{ transformOrigin: "left center" }}
+              <span
+                className="pt-bate block text-[clamp(3rem,8.4vw,6.9rem)] text-brasa lg:text-[clamp(3.4rem,5.5vw,5.5rem)]"
+                style={{ "--d": "0.32s" } as React.CSSProperties}
               >
                 e achou o vizinho.
-              </motion.span>
+              </span>
             </h1>
 
-            <motion.div
-              className="flex flex-col items-start gap-7"
-              initial={reduce ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.0, duration: 0.5 }}
-            >
+            <div className="pt-entra flex flex-col items-start gap-7" style={{ "--d": "0.55s" } as React.CSSProperties}>
               <p className="max-w-[34ch] text-[19px] leading-[1.5] text-nevoa sm:text-[21px]">
                 Faz o teste de 10 segundos e descobre onde o teu negócio tá vazando cliente antes da temporada.
               </p>
@@ -93,7 +76,7 @@ export function Hero() {
                 </a>
               </div>
               <p className="text-[14px] font-semibold text-nevoa">Grátis, sem cadastro. Nada fica salvo.</p>
-            </motion.div>
+            </div>
           </div>
 
           {/* mobile: o mapa vem logo abaixo, sangrando nas bordas */}

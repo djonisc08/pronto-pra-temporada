@@ -53,13 +53,25 @@ const BUSCA: Record<Tipo, string> = {
   Outro: "comércio",
 };
 
-const NA_MENSAGEM: Record<Tipo, string> = { ...BUSCA, Açaí: "açaíteria" };
+const NA_MENSAGEM: Record<Tipo, string> = { ...BUSCA, Açaí: "loja de açaí" };
 
 const COMIDA = new Set<Tipo>(["Restaurante", "Bar", "Açaí", "Sorveteria"]);
 
+/** O que aparece na foto boa de cada tipo de negócio. */
+const FOTO: Record<Tipo, string> = {
+  Restaurante: "pratos",
+  Bar: "drinks e petiscos",
+  "Loja de bebidas": "produtos",
+  "Casa de carne": "cortes",
+  Açaí: "copos e tigelas",
+  Sorveteria: "sorvetes",
+  Pousada: "quartos",
+  Outro: "produtos",
+};
+
 export function perguntas(tipo: Tipo | null): Pergunta[] {
   const t: Tipo = tipo ?? "Restaurante";
-  const coisa = COMIDA.has(t) ? "pratos" : t === "Pousada" ? "quartos" : "produtos";
+  const coisa = FOTO[t];
   const cat = COMIDA.has(t) ? "Cardápio" : t === "Pousada" ? "Quartos e preços" : "Catálogo";
   const catPergunta =
     t === "Pousada" ? "Os quartos e preços aparecem no perfil?" : `O ${cat.toLowerCase()} aparece no perfil?`;

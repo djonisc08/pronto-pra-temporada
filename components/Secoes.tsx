@@ -33,7 +33,7 @@ export function Portas() {
       <div className={wrap}>
         <h2 className="flex flex-col gap-3">
           <span className={lead}>o turista chega por uma de 3 portas.</span>
-          <span className={`${h2} text-areia-100`}>Se uma tá aberta,</span>
+          <span className={`${h2} text-areia-100`}>Se uma falha,</span>
           <span className={`${h2} text-brasa`}>ele vai pro vizinho.</span>
         </h2>
 
@@ -199,7 +199,7 @@ const FAQ = [
   ["É de graça mesmo?", "Sim. O Raio-X é grátis e sem compromisso."],
   ["Tu garante que eu apareço no Google ou no ChatGPT?", "Não. Ninguém sério garante. Eu mostro onde tá vazando, arrumo o que depende do teu negócio e meço todo mês."],
   ["Preciso te dar senha?", "Não. Tu me adiciona como gerente do perfil e pode me remover quando quiser."],
-  ["Quanto custa depois?", "Só falo de preço depois de te mostrar o Raio-X."],
+  ["Quanto custa depois?", "Depende do que o Raio-X mostrar. Se tiver o que arrumar, te passo a proposta por escrito, com o valor, e tu decide com calma."],
 ];
 
 export function Perguntas() {
