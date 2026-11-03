@@ -11,7 +11,7 @@ const h2 = "display text-[clamp(2.4rem,6.2vw,5rem)]";
 const PORTAS = [
   {
     titulo: "Não te acham.",
-    texto: "No mapa e na busca, tua casa nem aparece entre as opções.",
+    texto: "No mapa e na busca, teu negócio nem aparece entre as opções.",
     carimbos: ["Fora do mapa", "Link quebrado"],
   },
   {
@@ -90,7 +90,7 @@ export function RaioX() {
         <div className="lg:justify-self-end">
           <div className="w-full max-w-[480px] -rotate-[1.2deg] rounded-[var(--radius-card)] bg-areia-100 p-7 text-tinta shadow-[0_30px_70px_rgba(0,0,0,.5)] sm:p-9">
             <p className="border-b border-tinta/20 pb-4 text-[24px] font-black uppercase tracking-[-0.01em]" style={{ fontStretch: "108%" }}>
-              Raio-X da tua casa
+              Raio-X do teu negócio
             </p>
             <ol className="mt-6 flex flex-col gap-5">
               {["Onde não te acham", "Onde te acham e não te escolhem", "Onde te escolhem e ficam sem resposta"].map((t, i) => (
@@ -118,12 +118,12 @@ export function Prova() {
             <span className="display text-[clamp(2rem,4.2vw,3.1rem)] text-areia-100">“Qual o melhor restaurante nos Ingleses?”</span>
           </h2>
           <p className="max-w-[40ch] text-[19px] leading-[1.55] text-nevoa">
-            Cinco casas apareceram. Se a tua não tá na lista, o turista nem sabe que tu existe.
+            Cinco estabelecimentos apareceram. Se o teu não tá na lista, o turista nem sabe que tu existe.
           </p>
         </div>
 
         <figure className="w-full max-w-[480px] lg:justify-self-end">
-          <ol className="flex flex-col gap-2" aria-label="Cinco casas na resposta da IA, nomes ocultos">
+          <ol className="flex flex-col gap-2" aria-label="Cinco estabelecimentos na resposta da IA, nomes ocultos">
             {[58, 44, 66, 38, 52].map((w, i) => (
               <li key={i} className="flex items-center gap-4 rounded-lg bg-mata-800 px-4 py-3.5">
                 <span className="w-4 text-[17px] font-black text-ambar">{i + 1}</span>
@@ -141,7 +141,7 @@ export function Prova() {
         {CASO_REAL && (
           <div className="rounded-[var(--radius-card)] bg-mata-800 p-8 lg:col-span-2">
             <p className="text-[15px] font-bold text-nevoa">
-              Caso real: {CASO_REAL.casa}, {CASO_REAL.bairro}, {CASO_REAL.periodo}
+              Caso real: {CASO_REAL.negocio}, {CASO_REAL.bairro}, {CASO_REAL.periodo}
             </p>
             <div className="mt-4 grid gap-6 sm:grid-cols-2">
               <p className="text-[19px] text-nevoa">Antes: {CASO_REAL.antes}</p>
@@ -175,7 +175,7 @@ export function QuemFaz() {
             <span className={`${h2} text-areia-100`}>Djonata, da Ilha.</span>
           </h2>
           <div className="flex max-w-[44ch] flex-col gap-2 text-[20px] leading-[1.5] text-areia-100">
-            <p>Sou daqui e atendo pessoalmente, casa por casa.</p>
+            <p>Sou daqui e atendo pessoalmente, de porta em porta.</p>
             <p>Falo a língua do comércio: sem jargão, sem contrato de agência.</p>
           </div>
           <a href={WHATS_DIRETO} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center gap-2 self-start text-[17px] font-bold text-ambar underline-offset-4 hover:underline">
@@ -190,7 +190,7 @@ export function QuemFaz() {
 /* ---------- Perguntas ---------- */
 const FAQ = [
   ["É de graça mesmo?", "Sim. O Raio-X é grátis e sem compromisso."],
-  ["Tu garante que eu apareço no Google ou no ChatGPT?", "Não. Ninguém sério garante. Eu mostro onde tá vazando, arrumo o que depende da tua casa e meço todo mês."],
+  ["Tu garante que eu apareço no Google ou no ChatGPT?", "Não. Ninguém sério garante. Eu mostro onde tá vazando, arrumo o que depende do teu negócio e meço todo mês."],
   ["Preciso te dar senha?", "Não. Tu me adiciona como gerente do perfil e pode me remover quando quiser."],
   ["Quanto custa depois?", "Só falo de preço depois de te mostrar o Raio-X."],
 ];

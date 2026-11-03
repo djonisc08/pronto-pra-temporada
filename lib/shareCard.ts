@@ -1,5 +1,5 @@
 /**
- * Gera a imagem "Raio-X da tua casa" no próprio navegador (nada é enviado a servidor)
+ * Gera a imagem "Raio-X do teu negócio" no próprio navegador (nada é enviado a servidor)
  * e abre o compartilhamento do celular, ou baixa o arquivo no desktop.
  */
 export async function compartilharRaioX(opts: { vazando: string[]; ok: string[]; quem: string }) {
@@ -31,7 +31,7 @@ export async function compartilharRaioX(opts: { vazando: string[]; ok: string[];
   let y = 150;
   ctx.fillStyle = "#d99042";
   ctx.font = `700 34px ${fam}`;
-  ctx.fillText("Raio-X da tua casa", x, y);
+  ctx.fillText("Raio-X do teu negócio", x, y);
   y += 54;
   ctx.fillStyle = "#9aa49f";
   ctx.font = `600 32px ${fam}`;
@@ -42,11 +42,11 @@ export async function compartilharRaioX(opts: { vazando: string[]; ok: string[];
   ctx.font = `900 104px ${fam}`;
   if (n) {
     ctx.fillStyle = "#f2ede3";
-    ctx.fillText("TUA CASA TEM", x, y);
+    ctx.fillText("TEU NEGÓCIO", x, y);
+    y += 112;
+    ctx.fillText(`TEM ${n} ${n === 1 ? "PORTA" : "PORTAS"}`, x, y);
     y += 112;
     ctx.fillStyle = "#dc4c2b";
-    ctx.fillText(`${n} ${n === 1 ? "PORTA" : "PORTAS"}`, x, y);
-    y += 112;
     ctx.fillText("VAZANDO.", x, y);
   } else {
     ctx.fillStyle = "#d99042";
@@ -83,12 +83,12 @@ export async function compartilharRaioX(opts: { vazando: string[]; ok: string[];
 
   const blob: Blob | null = await new Promise((r) => canvas.toBlob(r, "image/png"));
   if (!blob) return;
-  const file = new File([blob], "raio-x-da-tua-casa.png", { type: "image/png" });
+  const file = new File([blob], "raio-x-do-teu-negocio.png", { type: "image/png" });
 
   const nav = navigator as Navigator & { canShare?: (d: ShareData) => boolean };
   if (nav.canShare?.({ files: [file] })) {
     try {
-      await nav.share({ files: [file], title: "Raio-X da tua casa" });
+      await nav.share({ files: [file], title: "Raio-X do teu negócio" });
       return;
     } catch (e) {
       if ((e as DOMException).name === "AbortError") return;

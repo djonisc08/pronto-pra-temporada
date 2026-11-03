@@ -174,7 +174,7 @@ export function Quiz() {
               <h3 ref={titulo} tabIndex={-1} className="display text-[clamp(2.4rem,6vw,4.6rem)] outline-none">
                 {res.vazando.length ? (
                   <>
-                    <span className="block text-areia-100">Tua casa tem</span>
+                    <span className="block text-areia-100">Teu negócio tem</span>
                     <span className="block text-brasa">
                       {res.vazando.length} {res.vazando.length === 1 ? "porta vazando." : "portas vazando."}
                     </span>

@@ -53,7 +53,7 @@ export function MapaVizinho({ className = "" }: { className?: string }) {
     return () => mq.removeEventListener("change", on);
   }, [reduce]);
 
-  // A luz segue o mouse dentro do mapa; parada, ela fica sobre a tua casa
+  // A luz segue o mouse dentro do mapa; parada, ela fica sobre o teu negócio
   useEffect(() => {
     const el = box.current;
     const g = luz.current;
@@ -88,7 +88,7 @@ export function MapaVizinho({ className = "" }: { className?: string }) {
       className={`relative select-none overflow-hidden ${className}`}
       style={{ containerType: "size" }}
       role="img"
-      aria-label="Mapa de uma busca por restaurante perto de mim: os pins dos vizinhos acendem e o da tua casa fica apagado."
+      aria-label="Mapa de uma busca por restaurante perto de mim: os pins dos vizinhos acendem e o do teu negócio fica apagado."
     >
       {/* caixa na proporção do desenho, cobrindo a área (como object-fit: cover) */}
       <div
@@ -164,7 +164,7 @@ export function MapaVizinho({ className = "" }: { className?: string }) {
             );
           })}
 
-          {/* tua casa: pisca e apaga */}
+          {/* teu negócio: pisca e apaga */}
           <motion.g
             initial={false}
             animate={reduce ? { opacity: 1 } : { opacity: [1, 0.2, 0.9, 0.15, 0.7, 1] }}
@@ -202,7 +202,7 @@ export function MapaVizinho({ className = "" }: { className?: string }) {
           transition={{ delay: fimVizinhos + 1.1, duration: 0.4 }}
         >
           <div className="-translate-x-1/2 whitespace-nowrap rounded-xl border border-mata-700 bg-mata-950/90 px-3.5 py-2">
-            <p className="text-[14px] font-extrabold leading-tight text-areia-100">Tua casa</p>
+            <p className="text-[14px] font-extrabold leading-tight text-areia-100">Teu negócio</p>
             <p className="text-[12px] font-semibold leading-tight text-nevoa">sem foto, sem horário</p>
           </div>
         </motion.div>

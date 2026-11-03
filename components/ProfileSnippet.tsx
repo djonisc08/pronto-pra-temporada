@@ -31,7 +31,7 @@ export function ProfileSnippet({ kind, meta, busca }: { kind: SnippetKind; meta:
 
   return (
     <div className={card} aria-hidden="true">
-      <p className="text-[17px] font-extrabold leading-tight">Tua casa</p>
+      <p className="text-[17px] font-extrabold leading-tight">Teu negócio</p>
       <p className="text-[13px] font-semibold text-nevoa-escura">{meta}</p>
 
       {kind === "photo" && (

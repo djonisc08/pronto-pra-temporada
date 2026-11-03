@@ -23,7 +23,7 @@ export default function Page() {
           <div className="mb-10 flex flex-col gap-4 lg:mb-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
             <h2 className="flex flex-col gap-3">
               <span className="text-[19px] font-semibold text-nevoa sm:text-[22px]">10 segundos, 5 perguntas.</span>
-              <span className="display text-[clamp(2.4rem,6vw,4.8rem)] text-areia-100">Onde a tua casa tá vazando?</span>
+              <span className="display text-[clamp(2.4rem,6vw,4.8rem)] text-areia-100">Onde o teu negócio tá vazando?</span>
             </h2>
             <p className="max-w-[38ch] text-[17px] leading-[1.55] text-nevoa">
               Responde com sinceridade. “Não sei” conta como vazamento: se tu não sabe, o turista também não acha. Nada fica salvo.

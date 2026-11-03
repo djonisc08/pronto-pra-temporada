@@ -62,7 +62,7 @@ export function Hero() {
               transition={{ delay: 1.0, duration: 0.5 }}
             >
               <p className="max-w-[34ch] text-[19px] leading-[1.5] text-nevoa sm:text-[21px]">
-                Faz o teste de 10 segundos e descobre onde a tua casa tá vazando cliente antes da temporada.
+                Faz o teste de 10 segundos e descobre onde o teu negócio tá vazando cliente antes da temporada.
               </p>
               <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
                 <a

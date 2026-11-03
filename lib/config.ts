@@ -13,7 +13,7 @@ export const WHATS_DIRETO = waLink("Oi Djonata! Quero o RAIO X.");
  * do dono. Enquanto for null, a seção não aparece na página.
  */
 export const CASO_REAL: null | {
-  casa: string;
+  negocio: string;
   bairro: string;
   antes: string;
   depois: string;
