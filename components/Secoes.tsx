@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CASO_REAL, WHATS_DIRETO, WHATS_DISPLAY } from "@/lib/config";
 import { Carimbo } from "./Carimbo";
+import { IaAoVivo } from "./IaAoVivo";
 import { Magnetic } from "./Magnetic";
 import { ChatIcon } from "./icons";
 
@@ -124,6 +125,7 @@ export function Prova() {
           <p className="max-w-[40ch] text-[17px] leading-[1.55] text-nevoa">
             É assim pra restaurante, bar, açaí, pousada: o turista pergunta e a IA escolhe por ele.
           </p>
+          <IaAoVivo />
         </div>
 
         <figure className="relative mx-auto w-full max-w-[380px] lg:mx-0 lg:justify-self-end">
@@ -233,6 +235,9 @@ export function CtaFinal() {
   return (
     <section id="cta-final" className="vinheta py-28 lg:py-40">
       <div className={`${wrap} flex flex-col items-start gap-10`}>
+        <p className="pt-neon rounded-2xl border-2 border-brasa-clara/60 px-5 py-2 display text-[clamp(1.6rem,5vw,2.8rem)] shadow-[0_0_24px_rgba(220,76,43,.35),inset_0_0_18px_rgba(220,76,43,.25)]" aria-hidden="true">
+          Aberto agora
+        </p>
         <h2 className="flex flex-col gap-2">
           <span className="display text-[clamp(3.2rem,10vw,8.5rem)] text-areia-100">Me chama</span>
           <span className="display text-[clamp(3.2rem,10vw,8.5rem)] text-ambar">no Whats.</span>

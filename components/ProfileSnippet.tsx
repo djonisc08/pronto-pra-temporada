@@ -1,8 +1,24 @@
 import type { SnippetKind } from "@/lib/quiz";
 
+const ALVO: Record<SnippetKind, string> = { rank: "mapa", photo: "foto", hours: "horário", reviews: "avaliações", menu: "cardápio" };
+
+/** Linha de raio-X que varre o cartão uma vez a cada pergunta (o cartão remonta a cada passo). */
+function Varredura({ kind }: { kind: SnippetKind }) {
+  return (
+    <>
+      <span className="pt-scan pointer-events-none absolute inset-x-0 h-10 bg-gradient-to-b from-transparent via-ambar/35 to-transparent">
+        <span className="absolute inset-x-0 top-1/2 h-[2px] bg-ambar shadow-[0_0_12px_2px_rgba(217,144,66,.8)]" />
+      </span>
+      <span className={`absolute right-3 rounded-md ${kind === "rank" ? "bottom-3" : "top-3"} bg-tinta px-2 py-1 font-mono text-[11px] font-bold tracking-wider text-ambar`}>
+        RAIO-X · {ALVO[kind]}
+      </span>
+    </>
+  );
+}
+
 /** Pedaço desenhado e genérico de um perfil de negócio. Não imita nenhuma interface real. */
 export function ProfileSnippet({ kind, meta, busca }: { kind: SnippetKind; meta: string; busca?: string }) {
-  const card = "w-full max-w-[360px] rounded-[var(--radius-card)] bg-areia-100 p-5 text-tinta shadow-[0_24px_50px_rgba(0,0,0,.45)]";
+  const card = "relative w-full max-w-[360px] overflow-hidden rounded-[var(--radius-card)] bg-areia-100 p-5 text-tinta shadow-[0_24px_50px_rgba(0,0,0,.45)]";
 
   if (kind === "rank") {
     return (
@@ -25,6 +41,7 @@ export function ProfileSnippet({ kind, meta, busca }: { kind: SnippetKind; meta:
             <span className="w-4">?</span> E tu?
           </li>
         </ol>
+        <Varredura kind={kind} />
       </div>
     );
   }
@@ -80,6 +97,7 @@ export function ProfileSnippet({ kind, meta, busca }: { kind: SnippetKind; meta:
           ))}
         </div>
       )}
+      <Varredura kind={kind} />
     </div>
   );
 }

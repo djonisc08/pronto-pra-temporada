@@ -14,6 +14,38 @@ const SLOTS = [
 const INICIO = 0.35;
 const PASSO = 0.42;
 
+const RAIO = 27;
+const VOLTA = 2 * Math.PI * RAIO;
+
+/** Nota de 0 a 5 num anel que enche até o valor. */
+function Medidor({ nota }: { nota: number }) {
+  const cor = nota >= 4 ? "var(--color-ambar-escuro)" : nota >= 3 ? "var(--color-ambar)" : "var(--color-brasa-escura)";
+  return (
+    <div className="absolute right-5 top-5 flex flex-col items-center gap-1">
+      <svg width="68" height="68" viewBox="0 0 68 68" className="-rotate-90">
+        <circle cx="34" cy="34" r={RAIO} fill="none" stroke="currentColor" strokeOpacity=".12" strokeWidth="7" />
+        <circle
+          className="pt-medidor"
+          cx="34"
+          cy="34"
+          r={RAIO}
+          fill="none"
+          stroke={cor}
+          strokeWidth="7"
+          strokeLinecap="round"
+          strokeDasharray={VOLTA}
+          strokeDashoffset={VOLTA * (1 - nota / 5)}
+          style={{ "--cheio": VOLTA } as React.CSSProperties}
+        />
+      </svg>
+      <span className="absolute top-[22px] text-[19px] font-black leading-none" style={{ color: cor }}>
+        {nota}/5
+      </span>
+      <span className="font-mono text-[10px] font-bold tracking-[0.14em] text-nevoa-escura">NOTA</span>
+    </div>
+  );
+}
+
 /** O perfil do negócio levando um carimbo por porta vazando (ou um "bem na frente" em âmbar). */
 export function ResultadoCarimbos({ carimbos, meta }: { carimbos: string[]; meta: string }) {
   const reduce = useReducedMotion();
@@ -36,8 +68,10 @@ export function ResultadoCarimbos({ carimbos, meta }: { carimbos: string[]; meta
   return (
     <div className="relative mx-auto aspect-[4/3.4] w-full max-w-[440px] lg:mx-0" aria-hidden="true">
       <div className="absolute inset-0 rotate-[-1.5deg] rounded-[var(--radius-card)] bg-areia-100 p-6 text-tinta shadow-[0_30px_70px_rgba(0,0,0,.5)]">
-        <p className="text-[19px] font-extrabold leading-tight">Teu negócio</p>
+        <p className="font-mono text-[11px] font-bold tracking-[0.14em] text-nevoa-escura">LAUDO · RAIO-X DE TEMPORADA</p>
+        <p className="mt-1 text-[19px] font-extrabold leading-tight">Teu negócio</p>
         <p className="text-[14px] font-semibold text-nevoa-escura">{meta}</p>
+        <Medidor nota={5 - Math.min(5, carimbos.length)} />
         <div className="mt-5 flex flex-col gap-3 opacity-60">
           {[78, 54, 66, 40, 58].map((w, i) => (
             <span key={i} className="h-3 rounded-full bg-tinta/15" style={{ width: `${w}%` }} />

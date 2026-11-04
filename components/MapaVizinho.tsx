@@ -133,6 +133,25 @@ export function MapaVizinho({ className = "", busca = "restaurante perto de mim"
           {/* lanterna: escurece só o chão; os pins ficam por cima, acesos */}
           {lanterna && <rect width="600" height="640" fill="#04110e" fillOpacity=".62" mask={`url(#mascara-${uid})`} />}
 
+          {/* radar varrendo a região a partir do teu negócio */}
+          {!reduce && (
+            <g aria-hidden="true">
+              <defs>
+                <linearGradient id={`feixe-${uid}`} x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stopColor="#d99042" stopOpacity="0" />
+                  <stop offset="1" stopColor="#d99042" stopOpacity=".38" />
+                </linearGradient>
+              </defs>
+              {[0, 0.9, 1.8].map((d) => (
+                <circle key={d} className="pt-anel" cx={TUA_CASA.x} cy={TUA_CASA.y - 20} r="150" fill="none" stroke="#d99042" strokeOpacity=".35" strokeWidth="1.5" style={{ animationDelay: `${d}s` }} />
+              ))}
+              <g className="pt-radar">
+                <path d={`M${TUA_CASA.x} ${TUA_CASA.y - 20} L ${TUA_CASA.x + 420} ${TUA_CASA.y - 20} A 420 420 0 0 0 ${TUA_CASA.x + 420 * Math.cos(-0.7)} ${TUA_CASA.y - 20 + 420 * Math.sin(-0.7)} Z`} fill={`url(#feixe-${uid})`} />
+                <line x1={TUA_CASA.x} y1={TUA_CASA.y - 20} x2={TUA_CASA.x + 420} y2={TUA_CASA.y - 20} stroke="#f2c27e" strokeOpacity=".7" strokeWidth="2" />
+              </g>
+            </g>
+          )}
+
           {/* vizinhos acendendo */}
           {VIZINHOS.map((p, i) => {
             const delay = base + i * step;
@@ -205,6 +224,19 @@ export function MapaVizinho({ className = "", busca = "restaurante perto de mim"
             <p className="text-[12px] font-semibold leading-tight text-nevoa">sem foto, sem horário</p>
           </div>
         </motion.div>
+      </div>
+
+      {/* painel do scanner: o diagnóstico acontecendo */}
+      <div className="absolute bottom-4 left-4 right-4 max-w-[330px] rounded-xl border border-ambar/30 bg-mata-950/85 px-4 py-3 font-mono text-[12px] leading-[1.6] tracking-wide text-nevoa backdrop-blur-sm sm:text-[13px] lg:bottom-[10%] lg:left-[22%]" aria-hidden="true">
+        <p className="pt-hud-linha flex items-center gap-2 text-ambar" style={{ "--d": "0.4s" } as React.CSSProperties}>
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ambar" /> RAIO-X · ESCANEANDO A REGIÃO
+        </p>
+        <p className="pt-hud-linha" style={{ "--d": `${base + 0.3}s` } as React.CSSProperties}>
+          {VIZINHOS.length} vizinhos aparecendo pro turista
+        </p>
+        <p className="pt-hud-linha text-brasa-clara" style={{ "--d": `${fimVizinhos + 1.1}s` } as React.CSSProperties}>
+          teu negócio: sem sinal ✕
+        </p>
       </div>
 
       {/* busca */}
