@@ -32,6 +32,8 @@ export function Quiz() {
   const [bairro, setBairro] = useState<Bairro | null>(null);
   const [respostas, setRespostas] = useState<(Resposta | null)[]>(VAZIO);
   const [salvando, setSalvando] = useState(false);
+  const [nome, setNome] = useState("");
+  const [negocio, setNegocio] = useState("");
   const titulo = useRef<HTMLHeadingElement>(null);
   const painel = useRef<HTMLDivElement>(null);
   const primeira = useRef(true);
@@ -39,7 +41,10 @@ export function Quiz() {
 
   const qs = useMemo(() => perguntas(tipo), [tipo]);
   const fim = step >= TOTAL;
-  const res = useMemo(() => resultado(tipo, bairro, respostas), [tipo, bairro, respostas]);
+  const res = useMemo(
+    () => resultado(tipo, bairro, respostas, { nome, negocio }),
+    [tipo, bairro, respostas, nome, negocio],
+  );
   const vazandoAteAgora = respostas.filter((r) => r && r !== "Sim").length;
 
   // Anúncio com ?tipo= e ?bairro= já chega com essas respostas marcadas
@@ -275,6 +280,34 @@ export function Quiz() {
                       </ul>
                     </div>
                   )}
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="flex flex-col gap-1.5 text-[15px] font-bold text-areia-100">
+                    Teu nome
+                    <input
+                      value={nome}
+                      onChange={(e) => setNome(e.target.value)}
+                      autoComplete="given-name"
+                      maxLength={60}
+                      placeholder="Ex.: Ana"
+                      className="min-h-[52px] rounded-xl border-2 border-mata-700 bg-mata-800 px-4 text-[17px] font-semibold text-areia-100 placeholder:text-nevoa/60 focus:border-ambar focus:outline-none"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1.5 text-[15px] font-bold text-areia-100">
+                    Nome do negócio
+                    <input
+                      value={negocio}
+                      onChange={(e) => setNegocio(e.target.value)}
+                      autoComplete="organization"
+                      maxLength={60}
+                      placeholder="Ex.: Açaí da Praia"
+                      className="min-h-[52px] rounded-xl border-2 border-mata-700 bg-mata-800 px-4 text-[17px] font-semibold text-areia-100 placeholder:text-nevoa/60 focus:border-ambar focus:outline-none"
+                    />
+                  </label>
+                  <p className="text-[14px] font-semibold text-nevoa sm:col-span-2">
+                    Opcional. Vai só na mensagem do WhatsApp, pra eu já pesquisar teu negócio. Nada fica salvo.
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">

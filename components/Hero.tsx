@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { lerParametros } from "@/lib/params";
 import { buscaDe } from "@/lib/quiz";
 import { Magnetic } from "./Magnetic";
@@ -40,11 +40,14 @@ export function Hero() {
           <div className="flex flex-col items-start gap-7 lg:pointer-events-auto lg:pr-6">
             <h1 className="display flex flex-col gap-2">
               <span className="text-[clamp(2.1rem,5.6vw,4.4rem)] text-areia-100 lg:text-[clamp(2.4rem,3.5vw,3.5rem)]">
+                {/* o espaço fica fora do bloco animado: o Safari apaga espaço no fim de inline-block */}
                 {LINHA_1.map((w, i) => (
-                  <span key={i} className="pt-entra inline-block" style={{ "--d": `${0.04 + i * 0.05}s` } as React.CSSProperties}>
-                    {w}
+                  <Fragment key={i}>
+                    <span className="pt-entra inline-block" style={{ "--d": `${0.04 + i * 0.05}s` } as React.CSSProperties}>
+                      {w}
+                    </span>
                     {i < LINHA_1.length - 1 ? " " : ""}
-                  </span>
+                  </Fragment>
                 ))}
               </span>
               <span

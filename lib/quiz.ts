@@ -135,8 +135,18 @@ export interface Resultado {
   link: string;
 }
 
-/** "Sim" é ok; "Não" e "Não sei" contam como vazamento. */
-export function resultado(tipo: Tipo | null, bairro: Bairro | null, respostas: (Resposta | null)[]): Resultado {
+/** Limpa o que a pessoa digitou: sem espaço sobrando e no máximo 60 caracteres. */
+function limpo(s: string | undefined): string {
+  return (s ?? "").replace(/\s+/g, " ").trim().slice(0, 60);
+}
+
+/** "Sim" é ok; "Não" e "Não sei" contam como vazamento. Nome e negócio vão só na mensagem, nada é salvo. */
+export function resultado(
+  tipo: Tipo | null,
+  bairro: Bairro | null,
+  respostas: (Resposta | null)[],
+  contato: { nome?: string; negocio?: string } = {},
+): Resultado {
   const qs = perguntas(tipo);
   const vazando: string[] = [];
   const ok: string[] = [];
@@ -150,10 +160,16 @@ export function resultado(tipo: Tipo | null, bairro: Bairro | null, respostas: (
       carimbos.push(q.carimbo);
     }
   });
-  const quem = `Sou ${NA_MENSAGEM[tipo ?? "Outro"]} ${PREP[bairro ?? "Outro"]}.`;
+  const nome = limpo(contato.nome);
+  const negocio = limpo(contato.negocio);
+  const segmento = `${NA_MENSAGEM[tipo ?? "Outro"]} ${PREP[bairro ?? "Outro"]}`;
+  // sem "do/da" para servir a qualquer nome: "Aqui é Ana, Pizzaria Bella (restaurante em Jurerê)."
+  const quem = nome || negocio
+    ? `Aqui é ${[nome, negocio].filter(Boolean).join(", ")} (${segmento}).`
+    : `Sou ${segmento}.`;
   const mensagem = vazando.length
-    ? `Oi Djonata! Fiz o teste. ${quem} Errei: ${curtos.join(", ")}. Quero o RAIO X.`
-    : `Oi Djonata! Fiz o teste. ${quem} Acertei tudo. Quero o RAIO X completo.`;
+    ? `Oi Djonata! ${quem} Fiz o teste e errei: ${curtos.join(", ")}. Quero o RAIO X.`
+    : `Oi Djonata! ${quem} Fiz o teste e acertei tudo. Quero o RAIO X completo.`;
   return { vazando, carimbos, ok, mensagem, link: waLink(mensagem) };
 }
 
